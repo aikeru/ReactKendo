@@ -1,0 +1,117 @@
+<html>
+  <head>
+    <title>Test</title>
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+	<link rel="stylesheet" href="http://cdn.kendostatic.com/2014.1.318/styles/kendo.common.min.css" />
+    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2014.1.318/styles/kendo.blueopal.min.css" />
+	<script src="http://cdn.kendostatic.com/2014.1.318/js/kendo.all.min.js"></script>
+    <!-- <script src="http://fb.me/react-0.5.1.js"></script> -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>
+  </head>
+  <body id="appBody">
+    <script type="text/jsx">
+	/** @jsx React.DOM */
+//TODO: create kendo button react component
+
+!function(reactKendo) {
+	
+	reactKendo.type = function(obj) {
+		return Object.prototype.toString.call(obj).slice(8, -1);
+	}
+	
+}(window.reactKendo = window.reactKendo || {});
+
+var KendoButton = React.createClass({
+  kendoObjectKeys: [],
+  getInitialState: function() {
+    return {
+	  bind: {}
+    }
+  },
+  getDefaultProps: function() {
+    return {component: React.DOM.button};
+  },
+  render: function() {
+	var component = this.props.component;
+    return <component {...this.props}>{this.props.children}</component>;
+  },
+  componentDidMount: function() {
+    jQuery(this.getDOMNode()).kendoButton(this.props.bind);
+	var kButton = jQuery(this.getDOMNode()).data('kendoButton');
+	for(var key in kButton) {
+		this.kendoObjectKeys.push(key);
+	}
+  },
+  componentDidUpdate: function() {
+	//Auto apply props to kendo object	
+	var kButton = jQuery(this.getDOMNode()).data('kendoButton');
+	outer: for(var propKey in this.props.bind) {
+		for(var kendoKeyIndex = 0; kendoKeyIndex < this.kendoObjectKeys.length; kendoKeyIndex++) {
+			var kendoKey = this.kendoObjectKeys[kendoKeyIndex];
+			if(propKey === kendoKey) {
+				if(reactKendo.type(kButton[kendoKey]) === 'Function') {
+					kButton[kendoKey](this.props.bind[propKey]);
+				}
+				continue outer;
+			}
+		}
+	}
+  },
+  componentWillUnmount: function() {
+    jQuery(this.getDOMNode()).data('kendoButton').destroy();
+	jQuery(this.getDOMNode()).empty();
+  }
+});
+
+var App = React.createClass({
+  getInitialState: function() {
+    return {
+		buttonText: "Change This",
+		buttonEnabled: false,
+		buttonIcon: "cancel"
+	};
+  },
+  changeEnabled: function(enableButton) {
+	debugger;
+	if(enableButton) {
+		this.setState({
+			buttonEnabled: true
+		});
+	} else {
+		this.setState({
+			buttonEnabled: false
+		});
+	}
+  },
+  sayHello: function(e) {
+	alert('Hello from kendo button!');
+	console.log(e);
+  },
+  buttonTextChanged: function(e) {
+	this.setState({buttonText: e.target.value});
+  },
+  render: function() {
+    return (
+		<div>
+			<div>
+				<KendoButton bind={{enable:this.state.buttonEnabled, icon: "cancel"}} id="myButton">Disabled!</KendoButton>
+				<KendoButton bind={{enable:true, icon: "note"}} id="myButton2">Enabled!</KendoButton>
+				<KendoButton bind={{icon: "tick"}} id="myButton3">Correct</KendoButton>
+				<KendoButton bind={{click: this.sayHello}} id="myButton4">Say Hello</KendoButton>
+				<KendoButton id="myButton5">{this.state.buttonText}</KendoButton>
+		  
+			</div>
+			<div>
+				<input type="text" value={this.state.buttonText} onChange={this.buttonTextChanged} />
+				<button onClick={this.changeEnabled.bind(this,true)}>Set Enabled</button>
+				<button onClick={this.changeEnabled.bind(this,false)}>Set Disabled</button>
+			</div>
+		</div>
+	);
+  }
+});
+React.render(<App />, document.getElementById('appBody'));
+	</script>
+  </body>
+ </html>

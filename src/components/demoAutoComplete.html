@@ -1,0 +1,129 @@
+<html>
+  <head>
+    <title>Test</title>
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+	<link rel="stylesheet" href="http://cdn.kendostatic.com/2014.1.318/styles/kendo.common.min.css" />
+    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2014.1.318/styles/kendo.blueopal.min.css" />
+	<script src="http://cdn.kendostatic.com/2014.1.318/js/kendo.all.min.js"></script>
+    <!-- <script src="http://fb.me/react-0.5.1.js"></script> -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>
+  </head>
+  <body id="appBody">
+    <script type="text/jsx">
+	/** @jsx React.DOM */
+/** @jsx React.DOM */
+!function(reactKendo) {
+	
+	reactKendo.type = function(obj) {
+		return Object.prototype.toString.call(obj).slice(8, -1);
+	}
+	
+	reactKendo.applyProps = function(boundProps, keys, kWidget) {
+		outer: for(var propKey in boundProps) {
+			for(var kendoKeyIndex = 0; kendoKeyIndex < keys.length; kendoKeyIndex++) {
+				var kendoKey = keys[kendoKeyIndex];
+				if(propKey === kendoKey) {
+					if(reactKendo.type(kWidget[kendoKey]) === 'Function') {
+						kWidget[kendoKey](boundProps[propKey]);
+					}
+					continue outer;
+				}
+			}
+		}
+	}
+	
+}(window.reactKendo = window.reactKendo || {});
+
+var KendoAutoComplete = React.createClass({
+  widgetName: 'kendoAutoComplete',
+  kendoObjectKeys: [],
+  getInitialState: function() {
+    return {
+	  bind: {}
+    }
+  },
+  getDefaultProps: function() {
+    return {component: React.DOM.input};
+  },
+  render: function() {
+	var component = this.props.component;
+    //return <React.DOM.input {...this.props}>{this.props.children}</React.DOM.input>;
+	return <input {...this.props} type="text" />;
+  },
+  componentDidMount: function() {
+	jQuery(this.getDOMNode())[this.widgetName](this.props.bind);
+	var kWidget = jQuery(this.getDOMNode()).data(this.widgetName);
+	for(var key in kWidget) {
+		this.kendoObjectKeys.push(key);
+	}
+  },
+  componentDidUpdate: function() {
+	//Auto apply props to kendo object	
+	var kWidget = jQuery(this.getDOMNode()).data(this.widgetName);
+	reactKendo.applyProps(this.props.bind, this.kendoObjectKeys, kWidget);
+  },
+  componentWillUnmount: function() {
+    jQuery(this.getDOMNode()).data(this.widgetName).destroy();
+	jQuery(this.getDOMNode()).empty();
+  }
+});
+var App = React.createClass({
+  sampleData: [
+	"Arkansas",
+	"Arizona",
+	"California",
+	"Indiana",
+	"Missouri",
+	"North Carolina",
+	"Texas"
+  ],
+  getInitialState: function() {
+    return {
+		buttonText: "Change This",
+		buttonEnabled: false,
+		buttonIcon: "cancel"
+	};
+  },
+  changeEnabled: function(enableButton) {
+	if(enableButton) {
+		this.setState({
+			buttonEnabled: true
+		});
+	} else {
+		this.setState({
+			buttonEnabled: false
+		});
+	}
+  },
+  sayHello: function(e) {
+	alert('Hello from kendo button!');
+	console.log(e);
+  },
+  autoCompleteValueChanged: function(e) {
+	this.setState({buttonText: e.target.value});
+  },
+  render: function() {
+    return (
+		<div>
+			<div>
+				<span>Select Multiple with startswith</span>
+				<KendoAutoComplete bind={{dataSource: this.sampleData, filter: "startsWith", placeholder: "Select State...", separator: ", "}} 
+								   id="myAutoComplete"></KendoAutoComplete>		  
+				<span>Select Single with contains</span>
+				<KendoAutoComplete bind={{dataSource: this.sampleData, filter: "contains", placeholder: "Select State..." }}
+								   id="myAutoComplete"></KendoAutoComplete>		  
+			</div>
+			<div>
+				<input type="text" value={this.state.buttonText} onBlur={this.autoCompleteValueChanged} />
+				<button onClick={this.changeEnabled.bind(this,true)}>Set Enabled</button>
+				<button onClick={this.changeEnabled.bind(this,false)}>Set Disabled</button>
+			</div>
+		</div>
+	);
+  }
+});
+React.render(<App />, document.getElementById('appBody'));
+	</script>
+  </body>
+ </html>
