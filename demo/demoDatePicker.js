@@ -13,7 +13,6 @@ var App = React.createClass({
         this.setState({ datePickerValue: e.target.value });
     },
     onDatePickerChange: function onDatePickerChange(e) {
-        console.log('changed!');
         this.setState({ datePickerValue: e.sender.value() });
     },
     render: function render() {
