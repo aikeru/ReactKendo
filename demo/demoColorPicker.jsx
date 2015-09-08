@@ -33,7 +33,7 @@ var App = React.createClass({
                         </li>
                         <li>
                             <span>Color Selected:</span>
-                            <div style={this.state.divStyle}></div>
+                            <div style={{backgroundColor: this.state.divStyle.backgroundColor, width: 100, height: 100}}></div>
                         </li>
                     </ul>
 				</div>

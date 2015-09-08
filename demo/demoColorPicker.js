@@ -66,7 +66,7 @@ var App = React.createClass({
                             null,
                             "Color Selected:"
                         ),
-                        React.createElement("div", { style: this.state.divStyle })
+                        React.createElement("div", { style: { backgroundColor: this.state.divStyle.backgroundColor, width: 100, height: 100 } })
                     )
                 )
             )
