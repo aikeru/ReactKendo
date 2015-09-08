@@ -1,6 +1,6 @@
 {
   "name": "reactkendo",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "A series of components enabling the use of Kendo UI with React",
   "main": "dist/reactKendo.js",
   "moduleType": [

@@ -1,6 +1,6 @@
 {
   "name": "ReactKendo",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "A series of components to enable usage of React with Kendo.",
   "main": "app.js",
   "scripts": {
