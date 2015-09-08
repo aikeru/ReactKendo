@@ -6,8 +6,9 @@ var App = React.createClass({
         };
     },
     onFlatColorPickerChanged: function(e) {
-        debugger;
-        this.setState({divStyle: { backgroundColor: e.sender.value() } });
+        var divStyle = this.state.divStyle;
+        divStyle.backgroundColor = e.sender.value();
+        this.setState({divStyle: divStyle });
     },
 	render: function() {
 		return (
@@ -33,7 +34,7 @@ var App = React.createClass({
                         </li>
                         <li>
                             <span>Color Selected:</span>
-                            <div style={{backgroundColor: this.state.divStyle.backgroundColor, width: 100, height: 100}}></div>
+                            <div style={this.state.divStyle}></div>
                         </li>
                     </ul>
 				</div>
