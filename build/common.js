@@ -36,8 +36,8 @@
                 },
                 componentDidMount: function componentDidMount() {
                     jQuery(this.getDOMNode())[widgetName](this.props.bind);
-                    var kButton = jQuery(this.getDOMNode()).data(widgetName);
-                    for (var key in kButton) {
+                    var kWidget = jQuery(this.getDOMNode()).data(widgetName);
+                    for (var key in kWidget) {
                         this.kendoObjectKeys.push(key);
                     }
                 },

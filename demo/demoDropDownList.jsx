@@ -21,7 +21,7 @@ var App = React.createClass({
 				<div>
                     <ul>
                         <li>
-					        <span>Color Picker:</span>
+					        <span>Drop Down List:</span>
 					        <Kendo.DropDownList id="myDropDownList"
                                 bind={{dataSource: this.staticDataSource}}></Kendo.DropDownList>
                         </li>
