@@ -289,7 +289,13 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
                 props,
                 props.children
             );
+        }),
+        FlatColorPicker: common.createCommonClassForWidget('kendoFlatColorPicker', function (props) {
+            return React.createElement(
+                'div',
+                props,
+                props.children
+            );
         })
-
     };
 })(window.reactKendo = window.reactKendo || {});

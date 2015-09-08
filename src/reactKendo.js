@@ -49,7 +49,7 @@
         LinearGauge: common.createCommonClassForWidget('kendoLinearGauge', (props) => <div {...props}>{props.children}</div>),
         RadialGauge: common.createCommonClassForWidget('kendoRadialGauge', (props) => <div {...props}>{props.children}</div>),
         Diagram: common.createCommonClassForWidget('kendoDiagram', (props) => <div {...props}>{props.children}</div>),
-        Map: common.createCommonClassForWidget('kendoMap', (props) => <div {...props}>{props.children}</div>)
-        
+        Map: common.createCommonClassForWidget('kendoMap', (props) => <div {...props}>{props.children}</div>),
+        FlatColorPicker: common.createCommonClassForWidget('kendoFlatColorPicker', (props) => <div {...props}>{props.children}</div>)
     };
 })(window.reactKendo = window.reactKendo || {});

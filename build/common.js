@@ -10,7 +10,7 @@
                 for (var kendoKeyIndex = 0; kendoKeyIndex < keys.length; kendoKeyIndex++) {
                     var kendoKey = keys[kendoKeyIndex];
                     if (propKey === kendoKey) {
-                        if (common.type(kWidget[kendoKey]) === 'Function') {
+                        if (reactKendo.common.type(kWidget[kendoKey]) === 'Function') {
                             kWidget[kendoKey](boundProps[propKey]);
                         }
                         continue outer;
@@ -44,7 +44,7 @@
                 componentDidUpdate: function componentDidUpdate() {
                     //Auto apply props to kendo object
                     var kWidget = jQuery(this.getDOMNode()).data(widgetName);
-                    common.applyProps(this.props.bind, this.kendoObjectKeys, kWidget);
+                    reactKendo.common.applyProps(this.props.bind, this.kendoObjectKeys, kWidget);
                 },
                 componentWillUnmount: function componentWillUnmount() {
                     jQuery(this.getDOMNode()).data(widgetName).destroy();
