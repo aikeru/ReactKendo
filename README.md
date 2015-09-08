@@ -4,7 +4,7 @@
 
 * I assume you already know how to get react.js working, etc.
 * Include reactKendo.js from https://github.com/aikeru/ReactKendo/tree/master/dist
-* Use elements like <KendoDatePicker> OR alias using
+* Use elements like ```<KendoDatePicker>``` OR alias using
 ```javascript:
     var Kendo = reactKendo.Kendo;
     <Kendo.DatePicker ...>
