@@ -95,3 +95,7 @@ Please be aware that at this stage, this particular API call will most likely ch
 ### Why isn't there more source code?
 
 Because implementing a kendo widget wrapper with react is actually REALLY TRIVIAL to do. Testing the different permutations of kendo components and configurations is far more difficult.
+
+### How do I run the demos?
+
+You can run ```node app``` from the root of the project, then navigate to ```http://localhost:8080/index.html``` to see a list of demos.
