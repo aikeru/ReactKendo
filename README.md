@@ -1,5 +1,9 @@
 # ReactKendo
 
+I love React, I think it's awesome.
+Sometimes in order to adopt frameworks like React, it needs to "just work" with someone else's favorite UI framework (ie: Kendo).
+Kendo has projects to bind with Angular and Knockout, but not React. Cl
+
 ### How to use this?
 
 * I assume you already know how to get react.js working, etc.
