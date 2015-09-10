@@ -7,7 +7,10 @@ I love React, I think it's awesome. Sometimes in order to adopt frameworks like 
 ### How to use this?
 
 * Get react.js up and running in your project
-* Include the latest reactKendo.js from https://github.com/aikeru/ReactKendo/tree/master/dist
+* Get ReactKendo via...
+  - bower ```bower install reactkendo```
+  - npm ```npm install reactkendo```
+  - Directly download from [the repository](https://raw.githubusercontent.com/aikeru/ReactKendo/master/dist/reactKendo.js)
 * Use elements like ```<reactKendo.Kendo.DatePicker>``` OR alias using
 ```javascript:
     var Kendo = reactKendo.Kendo;
