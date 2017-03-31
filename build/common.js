@@ -32,23 +32,25 @@
                     };
                 },
                 render: function render() {
-                    return componentFactory(this.props);
+                    var domProps = Object.assign({}, this.props);
+                    delete domProps.bind;
+                    return componentFactory(domProps);
                 },
                 componentDidMount: function componentDidMount() {
-                    jQuery(this.getDOMNode())[widgetName](this.props.bind);
-                    var kWidget = jQuery(this.getDOMNode()).data(widgetName);
+                    jQuery(ReactDOM.findDOMNode(this))[widgetName](this.props.bind);
+                    var kWidget = jQuery(ReactDOM.findDOMNode(this)).data(widgetName);
                     for (var key in kWidget) {
                         this.kendoObjectKeys.push(key);
                     }
                 },
                 componentDidUpdate: function componentDidUpdate() {
                     //Auto apply props to kendo object
-                    var kWidget = jQuery(this.getDOMNode()).data(widgetName);
+                    var kWidget = jQuery(ReactDOM.findDOMNode(this)).data(widgetName);
                     reactKendo.common.applyProps(this.props.bind, this.kendoObjectKeys, kWidget);
                 },
                 componentWillUnmount: function componentWillUnmount() {
-                    jQuery(this.getDOMNode()).data(widgetName).destroy();
-                    jQuery(this.getDOMNode()).empty();
+                    jQuery(ReactDOM.findDOMNode(this)).data(widgetName).destroy();
+                    jQuery(ReactDOM.findDOMNode(this)).empty();
                 }
             });
 

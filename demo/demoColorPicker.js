@@ -74,4 +74,4 @@ var App = React.createClass({
         );
     }
 });
-React.render(React.createElement(App, null), document.getElementById('appBody'));
+ReactDOM.render(React.createElement(App, null), document.getElementById('appBody'));

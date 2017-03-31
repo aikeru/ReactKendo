@@ -46,4 +46,4 @@ var App = React.createClass({
 	);
   }
 });
-React.render(<App />, document.getElementById('appBody'));
+ReactDOM.render(<App />, document.getElementById('appBody'));

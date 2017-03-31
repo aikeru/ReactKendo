@@ -15,3 +15,4 @@ http.createServer((req, resp) => {
 	}).resume();
 }).listen(8080);
 console.log('Node server should be listening on 8080');
+console.log('Open http://localhost:8080/index.html in your browser');
